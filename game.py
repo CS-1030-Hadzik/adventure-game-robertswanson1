@@ -1,6 +1,6 @@
 '''
 Adventure Game
-Author: Scott Hadzik
+Author: Bobby Swanson
 Version: 1.0
 Description:
 This is a text-based adventure game where the player makes choices
