@@ -45,22 +45,17 @@ describe_area()
 
 
 # Ask the player for their first decision
-decision = input("Do you wish to take the path? (yes or no): ").lower()
+
 
 # conditional evaluate
 # Respond based on the player's decision
-if decision == 'yes':
-    print("Brave choice, {player_name}! You step onto the path and venture forward.")
-elif decision == "no":
-    print(player_name + ", you decide to wait. Perhaps courage will find you later.") # Concatenation example
-else:
-    print("Confused, you stand still, unsure of what to do.")
+
 
 while (True):
     decision = input("\t1. Take the left path i to the dark woods\n "
                      "\t2. Take the right path towards the mountain pass\n"
-                     "\t3 Go into a nearby Cave\n"
-                     "\t4 Explore the Hidden Valley\n"
+                     "\t3. Go into a nearby Cave\n"
+                     "\t4. Explore the Hidden Valley\n"
                      "\t5. Stay where you are \n"
                      "\tType 'i' to view your inventory").lower()
 
@@ -74,9 +69,17 @@ while (True):
         add_to_inventory("map", player1)
         player1.has_map = True
     elif decision == "3":
-        print("You go into the dark cave")
+        if player1.has_lantern == True:
+            print("You go into the dark cave")
+            add_to_inventory("Treasure", player1)
+        else:
+            print("It's too dark in the cave. Try to find something to illuminate your way")
     elif decision == "4":
-        print("You go into the hidden valley")
+        if player1.has_map:
+            print("You go into the hidden valley")
+            add_to_inventory("Rare Herbs", player1)
+        else:
+            print("You can't find the valley without directions")
     elif decision == "5":
         print("Confused, you stand still, unsure of what to do.")
     elif decision == "i":
