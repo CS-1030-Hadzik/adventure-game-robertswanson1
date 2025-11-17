@@ -8,11 +8,28 @@ to navigate through a mysterious forest.
 
 '''
 
+from Player import Player
+
+inventory = []
+
+player = Player(player_name)
+
+
+
+def describe_area():
+    
+
+def add_to_inventory(item, player):
+    player.inventory.append(item)
+    print("You picked up", item)
+
+
 
 # Welcome message and introduction
 
-print("Welcome to the Adventure Game!")
-print("You're journey begins here...")
+def welcome_player():
+    print("Welcome to the Adventure Game!")
+    print("You're journey begins here...")
 
 # Ask for the player's name
 player_name = input("What is your name, adventurer? ")
@@ -39,3 +56,25 @@ elif decision == "no":
     print(player_name + ", you decide to wait. Perhaps courage will find you later.") # Concatenation example
 else:
     print("Confused, you stand still, unsure of what to do.")
+
+
+
+    if decision == "1":
+        print(f"You go into the dark woods")
+        add_to_inventory("lantern", player1)
+    elif decision == "2":
+        print("You go towards tyhe mountain pass")
+        add_to_inventory("map", player1)
+        player1.has_lantern = True
+    elif decision == "3":
+        print("Confused, you stand still, unsure of what to do")
+    elif decision == "i":
+        print (player1.inventory)
+    else:
+
+
+player1 = welcome_player()
+
+player1 = Player(name)
+
+describe_area()
