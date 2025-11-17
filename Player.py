@@ -1,5 +1,5 @@
 class Player():
-    def __init_(self):
+    def __init__(self, name):
         self.name = name
         self.inventory = []
         self.health = 100
