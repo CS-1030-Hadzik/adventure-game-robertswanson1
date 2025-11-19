@@ -11,9 +11,6 @@ to navigate through a mysterious forest.
 from Player import Player
 
 
-def add_to_inventory(item, player):
-    player.inventory.append(item)
-    print("You picked up", item)
 
 
 
@@ -39,10 +36,62 @@ def welcome_player():
     return player1
 
 
+def add_to_inventory(item, player):
+    if not item in player.inventory:
+        player.inventory.append(item)
+        print("You picked up", item)
+
+
+def explore_dark_woods(player):
+    print(f"You go into the dark woods")
+    add_to_inventory("lantern", player1)
+    player1.has_lantern = True
+
+def explore_mountain_pass(player):
+    print("You go towards the mountain pass")
+    add_to_inventory("map", player1)
+    player1.has_map = True
+
+def explore_cave(player):
+    if player1.has_lantern == True:
+        print("You go into the dark cave")
+        add_to_inventory("treasure", player1)
+    else:
+        print("It's too dark in the cave. Try to find something to illuminate your way")
+        player.health -= 10
+
+def explore_hidden_valley(player):
+    if player1.has_map:
+            print("You go into the hidden valley")
+            add_to_inventory("rare herbs", player1)
+    else:
+        print("You can't find the valley without directions")
+        player.health -= 10
+
+def stay_still(player):
+    print("Confused, you stand still, unsure of what to do.")
+    player.health -= 10
+
+def check_win(player):
+    if "treasure" in player.inventory and "rare herbs" in player.inventory:
+        print("You have won the game!")
+        return True
+    else:
+        return False
+    
+def check_lost(player):
+    if player.health <= 0:
+        print("Your health has gone to 0. You died!")
+        return True
+    else:
+        return False
+
 player1 = welcome_player()
+
 
 describe_area()
 
+has_won = False
 
 # Ask the player for their first decision
 
@@ -51,7 +100,7 @@ describe_area()
 # Respond based on the player's decision
 
 
-while (True):
+while (not has_won):
     decision = input("\t1. Take the left path into the dark woods\n "
                      "\t2. Take the right path towards the mountain pass\n"
                      "\t3. Go into a nearby Cave\n"
@@ -61,29 +110,31 @@ while (True):
 
 
     if decision == "1":
-        print(f"You go into the dark woods")
-        add_to_inventory("lantern", player1)
-        player1.has_lantern = True
+        explore_dark_woods(player1)
+               
     elif decision == "2":
-        print("You go towards tyhe mountain pass")
-        add_to_inventory("map", player1)
-        player1.has_map = True
+        explore_mountain_pass(player1)
+    
     elif decision == "3":
-        if player1.has_lantern == True:
-            print("You go into the dark cave")
-            add_to_inventory("Treasure", player1)
-        else:
-            print("It's too dark in the cave. Try to find something to illuminate your way")
+       explore_cave(player1)
+
     elif decision == "4":
-        if player1.has_map:
-            print("You go into the hidden valley")
-            add_to_inventory("Rare Herbs", player1)
-        else:
-            print("You can't find the valley without directions")
+        explore_hidden_valley(player1)
+
     elif decision == "5":
-        print("Confused, you stand still, unsure of what to do.")
+        stay_still(player1)
+
     elif decision == "i":
         print (player1.inventory)
     else:
         print("That is not a valid choice")
+
+    print("Your health is:", player1.health)
+    has_lost = check_lost(player1)
+    if has_lost:
+        break
+    has_won = check_win(player1)
+
+
+
 
