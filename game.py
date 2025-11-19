@@ -52,7 +52,7 @@ describe_area()
 
 
 while (True):
-    decision = input("\t1. Take the left path i to the dark woods\n "
+    decision = input("\t1. Take the left path into the dark woods\n "
                      "\t2. Take the right path towards the mountain pass\n"
                      "\t3. Go into a nearby Cave\n"
                      "\t4. Explore the Hidden Valley\n"
@@ -86,3 +86,4 @@ while (True):
         print (player1.inventory)
     else:
         print("That is not a valid choice")
+
